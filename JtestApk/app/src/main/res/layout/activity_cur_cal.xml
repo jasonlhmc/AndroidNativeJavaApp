@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/curCalTextInputLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/curCalSubmit">-->
+
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:id="@+id/curCalTextInputEditText"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="Calculator" />-->
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+    <TableLayout
+        android:id="@+id/curCalTableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/filterSubmitRow"/>
+
+    <LinearLayout
+        android:id="@+id/filterSubmitRow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/curCalTableLayout"
+        app:layout_constraintBottom_toTopOf="@+id/curCalResult">
+        <AutoCompleteTextView
+            android:id="@+id/curCalFilter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:maxLines="1"
+            android:hint="@string/input_cur_code_name"/>
+        <Button
+            android:id="@+id/curCalSubmit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:text="@string/button_cur_cal"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/curCalResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/filterSubmitRow"
+        app:layout_constraintBottom_toTopOf="@+id/curCalGrid"
+        android:padding="4dp"
+        android:background="@drawable/view_underline"/>
+
+    <GridView
+        android:id="@+id/curCalGrid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:numColumns="5"
+        app:layout_constraintTop_toBottomOf="@+id/curCalResult"
+        app:layout_constraintBottom_toBottomOf="parent">
+    </GridView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

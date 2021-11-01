@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    android:orientation="vertical"
+    android:padding="4dp">
+        <TextView
+            android:id="@+id/noteTextLock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:maxLines="1"
+            android:gravity="center_horizontal"
+            android:background="@drawable/view_underline"/>
+        <TextView
+            android:id="@+id/noteTextDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:maxLines="1"
+            android:background="@drawable/view_underline"/>
+        <TextView
+            android:id="@+id/noteTextEditDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:maxLines="1"
+            android:background="@drawable/view_underline"/>
+        <ImageView
+            android:id="@+id/notePaintImageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            tools:ignore="ContentDescription" />
+</LinearLayout>

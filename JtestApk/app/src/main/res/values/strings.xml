@@ -1,0 +1,82 @@
+<resources>
+    <!-- \u0020 = space -->
+    <string name="app_name">Personal App</string>
+    <!-- Lucky Dice Activity -->
+    <string name="dice_number_1">⚀</string>
+    <string name="dice_number_2">⚁</string>
+    <string name="dice_number_3">⚂</string>
+    <string name="dice_number_4">⚃</string>
+    <string name="dice_number_5">⚄</string>
+    <string name="dice_number_6">⚅</string>
+    <!-- Currency Activity -->
+    <string name="warn_digit_only">Digits ONLY.</string>
+    <!-- QR Code Activity -->
+    <string name="button_gen_qrcode">Generate QR Code</string>
+    <string name="button_read_image">Read QR Code From Image</string>
+    <string name="hint_string_input">String Input</string>
+    <!-- Notes Activity -->
+    <string name="grid_menu_delete">DELETE</string>
+    <string name="dialog_delete_title">DELETE record in database</string>
+    <string name="dialog_delete_msg">NO UNDO \n\nAre you sure?</string>
+    <string name="dialog_switch_paint_title">Switch to Painting.</string>
+    <string name="dialog_switch_paint_msg">Everything will be discard. \n\nAre you sure?</string>
+    <string name="display_stroke_width">Stroke Width: </string>
+    <string name="menu_clean">CLEAN ALL</string>
+    <string name="menu_color">Color</string>
+    <string name="menu_color_picker">Color Picker</string>
+    <string name="menu_argb_input">ARGB Input</string>
+    <string name="menu_stroke_width">Stroke Width</string>
+    <string name="menu_stroke_style">Stroke Style</string>
+    <string name="menu_style_stroke">Paint.Style.STROKE</string>
+    <string name="menu_style_fill">Paint.Style.FILL</string>
+    <string name="menu_style_fill_stroke">Paint.Style.FILL_AND_STROKE</string>
+    <string name="menu_special">Special</string>
+    <string name="menu_special_emboss">Emboss</string>
+    <string name="menu_special_blur">Blur</string>
+    <string name="menu_special_erase">Erase</string>SrcATop
+    <string name="menu_special_srcatop">SrcATop</string>
+    <string name="menu_save">Save to local</string>
+    <string name="dialog_switch_text_title">Switch to Typing.</string>
+    <string name="dialog_switch_text_msg">Everything will be discard. \n\nAre you sure?</string>
+    <string name="dialog_argb_title">ARGB Input(0–255):\u0020</string>
+    <string name="dialog_save_title">File name: </string>
+    <string name="text_last_edit">Last Edit:\u0020</string>
+    <!-- Common -->
+    <string name="dialog_positive">YES</string>
+    <string name="dialog_negative">NO</string>
+    <string name="dialog_negative_cancel">CANCEL</string>
+
+    <!-- Layout xml -->
+    <string name="row_cancel">❎</string>
+    <!-- Currency Activity -->
+    <string name="input_cur_code_name">Currency Code/Currency Name</string>
+    <string name="button_cur_cal">CAL!</string>
+    <string name="input_cur_search">Search</string>
+    <string name="input_cur_amount">Amount</string>
+    <!-- Dice Activity -->
+    <string name="switch_dice_hide">HIDE</string>
+    <string name="switch_dice_order">ORDER</string>
+    <string name="switch_dice_shake">SHAKE</string>
+    <string name="button_dice_unlock">UNLOCK</string>
+    <string name="button_dice_roll">ROLL</string>
+    <!-- Notes Activity -->
+    <string name="input_note_hint_title">Title: </string>
+    <string name="text_lock_pin">[ 🔒 : 🔢 ]</string>
+    <string name="text_lock_fp">[ 🔒 : 👆 ]</string>
+    <string name="text_lock_pin_fp">[ 🔒 : 🔢 + 👆 ]</string>
+    <string name="button_save_submit">Save &amp; upload</string>
+    <string name="button_save_submit_pin">[🔒:🔢] Save &amp; submit</string>
+    <string name="button_save_submit_fp">[🔒:👆] Save &amp; submit</string>
+    <string name="button_save_submit_pin_fp">[🔒: 🔢+👆] Save &amp; submit</string>
+    <string name="input_note_hint_search">Search Title: </string>
+    <string name="input_task">Task</string>
+    <string name="toggle_task_on">⭕️</string>
+    <string name="toggle_task_off">❌</string>
+    <!-- note_tools_layout -->
+    <string name="button_note_tools_more">&#128316;</string>
+    <string name="button_note_tools_switch">&#128221;</string>
+    <!-- Layout xml -->
+    <!-- note_pin_input -->
+    <string name="text_note_pin_msg">Input you pin below:</string>
+    <string name="input_note_pin_hint">PIN</string>
+</resources>

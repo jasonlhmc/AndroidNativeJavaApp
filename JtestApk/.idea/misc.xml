@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable/currency_full_list_table_border.xml" value="0.41770833333333335" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2764957264957265" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable/textinput_surface_red.xml" value="0.5" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable/textinput_surface_yellow.xml" value="0.39487179487179486" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable/view_underline.xml" value="0.1564102564102564" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/acricity_currency.xml" value="0.5536458333333333" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_cur_cal.xml" value="0.18" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_currenct_full.xml" value="0.5" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_currency.xml" value="0.33" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_currency_full.xml" value="0.33" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_luck_dice.xml" value="0.33" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_lucky_dice.xml" value="0.39829059829059826" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_menu.xml" value="0.33" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_notes.xml" value="0.33" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_notes_full.xml" value="0.25" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_notes_paint.xml" value="0.26324786324786326" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_qrcode.xml" value="0.39829059829059826" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/cur_cal_flag.xml" value="0.2341880341880342" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/cur_cal_row.xml" value="0.33" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/note_grid_text_task.xml" value="0.21837606837606838" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/note_pin_input.xml" value="0.5" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/note_task_row.xml" value="0.5" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/notes_argb_colorpicker_rectangle.xml" value="0.2833333333333333" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/notes_grid_paint.xml" value="0.33" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/notes_grid_text.xml" value="0.33" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/notes_tools_layout.xml" value="0.5" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/textinput_surface_red.xml" value="0.16538461538461538" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.41875" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.41875" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/notePinInputLayout"
+    android:padding="12dp"
+    android:orientation="vertical">
+    <TextView
+        android:paddingBottom="30dp"
+        android:id="@+id/notePinMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="@string/text_note_pin_msg"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="1dp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/notePinInput"
+            android:inputType="number|numberPassword"
+            android:hint="@string/input_note_pin_hint"
+            android:background="@color/zxing_transparent"/>
+    </com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>
