@@ -88,5 +88,5 @@ line4line4line4
 ^ Cons: self telegram bot is needed; telegram installed  
 
 > ~~Working on~~ ✓DONE security of the notes, add isLocked indicator for grand read/write/delete permission after fingerprint validation if set in the note(in More option button: :arrow_up_small:)  
-^ More Info : ✓DONE not only fingerprint authentication, but also pin password for note added: both method can use together(textnote for now, drawing note coming soon)  
+^ More Info : ✓DONE not only fingerprint authentication, but also pin password for note added: both method can use together  
 ^ More Info+: ~~trying to~~ ✓DONE implement blur image for locked Drawing note, text note content will be replace will *    
