@@ -37,15 +37,19 @@ e.g.
 ## QR Code Scanner:  
 ．Using ZXING: https://github.com/zxing/zxing  
 ．Instant open webview or text depends on QR Code source(text/url)  
+．*NEW* Added track code remove function when QR Code is url  
+．*NEW* Implement [Google Safe Browsing API](https://developer.android.com/training/safetynet/safebrowsing#java) to check the url  
 ．Long press for submenu  
 -generate QR Code  
 ．Input text/url to generate QR Code reactively  
 -Read QR Code from image  
 ．Perform action like QR Code Scanner when the image contain QR Code  
+．*NEW* Added track code remove function when QR Code is url  
+．*NEW* Implement [Google Safe Browsing API](https://developer.android.com/training/safetynet/safebrowsing#java) to check the url  
 > Working on add to clipboard function
 
 ## Jot Notes:
-．Using MongoDB:  
+．Using MongoDB & MongoDB Realm:  
 ．https://www.mongodb.com/  
 ．https://www.mongodb.com/realm  
 ．Text is supported, UTF-8(e.g. emoji, unicode characters etc.) supported by MongoDB  
@@ -53,7 +57,7 @@ e.g.
 ．ALL notes are stored in MongoDB and can peform actions after: insert/update/delete  
 ．Single short click Jot Notes will create a new Text note, can switch to Drawing by pressing :art: button at the bottom right;  
 ．Drawing can switch to Text note by pressing :memo: button at the bottom right  
-．More option button: :arrow_up_small: Drawing can peform clean all; change color by color picker(dialog); change stroke style(menu), stroke width(slider) etc. with this.  
+．More option button: :arrow_up_small: Drawing can peform clean all; change color by color picker(dialog); change stroke style(menu), stroke width(slider) etc.  
 > ~~Working on Text note more option, like checkbox task(Map<Boolean, String> task, for intuitive :ballot_box_with_check: and update in grid);~~  
 ^ ✓Done e.g.
 <pre>
