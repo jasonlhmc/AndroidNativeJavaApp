@@ -535,10 +535,16 @@ public class CheckCurrencyActivity extends AppCompatActivity {
         double rate = 0;
         for (CurrencyObject currencyObject : currencyObjectList) {
             if (currencyObject.getCurCode().equals(curCalRowObj.getCurCode())) {
+//                Log.v("BTC", "currencyObject = " + currencyObject.toString());
                 rate = currencyObject.getRate();
+                //zero handling
+                if (rate == 0) {
+                    rate = currencyObject.getOriginalRate() / currencyObject.getLocaleRate();
+                }
                 break;
             }
         }
+//        Log.v("BTC", "selectedCur = " + selectedCur.toString());
         rs = new BigDecimal(selectedCur.getRate() / rate);
 //        Log.v("INFO", curCalRowObj.getCurCode() + selectedCur.getCurCode() + " | " + selectedCur.getRate() + " | " + rate + " | " + rs);
         return rs;

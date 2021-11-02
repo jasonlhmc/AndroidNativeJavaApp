@@ -8,11 +8,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
@@ -33,7 +37,9 @@ import com.example.utils.BlurUtils;
 import com.example.utils.EncryptDecryptUtil;
 import com.example.utils.ImageConvertUtils;
 import com.example.utils.PropertiesUtils;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -48,6 +54,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
@@ -74,8 +81,14 @@ public class NotesListViewActivity extends AppCompatActivity {
     private MongoCollection keyCollection;
 
     private List<NoteModelObject> noteModelObjectList;
+    private List<NoteModelObject> noteSearchList;
 
     private NotesFullListGridAdapter notesFullListGridAdapter;
+    private FloatingActionButton notesFullListFloatingActionButton, notesFloatSearch, notesFloatNew;
+    boolean subFabVisible;
+    private TextView textFabSearch, textFabNew;
+    private TextInputLayout notesFullListSearch;
+    private TextInputEditText notesSearchInput;
 
 //    private List<String> resultJsonList;
     private Map<NoteModelObject, String> rsObjMap;
@@ -208,7 +221,8 @@ public class NotesListViewActivity extends AppCompatActivity {
                 Collections.reverse(noteModelObjectList);
 //                Collections.reverse(resultJsonList);
 //                noteModelObjectList.stream().forEach(System.out::println);
-                setupGridView();
+                //init GridView
+                setupGridView(null);
                 //hide loading progressBar
                 loadingNotesList.setVisibility(View.INVISIBLE);
             } else {
@@ -237,6 +251,70 @@ public class NotesListViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notes_full);
         //set loading screen
         loadingNotesList = (ProgressBar) findViewById(R.id.loadingNotesList);
+        notesFullListSearch = (TextInputLayout) findViewById(R.id.notesFullListSearch);
+        notesSearchInput = (TextInputEditText) findViewById(R.id.notesSearchInput);
+        notesSearchInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                noteSearchList = new ArrayList<NoteModelObject>();
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                for (NoteModelObject noteModelObject : noteModelObjectList) {
+                    if (noteModelObject.getTitle().toLowerCase(Locale.ROOT).contains(charSequence.toString().toLowerCase(Locale.ROOT))) {
+                        noteSearchList.add(noteModelObject);
+                    }
+                }
+                Log.v("SEARCH", "noteSearchList.size() = " + noteSearchList.size());
+                setupGridView(noteSearchList);
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                noteSearchList = new ArrayList<NoteModelObject>();
+            }
+        });
+        //setup Floating action button
+        subFabVisible = false;
+        textFabSearch = (TextView) findViewById(R.id.textFabSearch);
+        textFabNew = (TextView) findViewById(R.id.textFabNew);
+        notesFullListFloatingActionButton = (FloatingActionButton) findViewById(R.id.notesFullListFloatingActionButton);
+        notesFloatSearch = (FloatingActionButton) findViewById(R.id.notesFloatSearch);
+        notesFloatNew = (FloatingActionButton) findViewById(R.id.notesFloatNew);
+        notesFullListFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!subFabVisible) {
+                    notesFloatSearch.show();
+                    notesFloatNew.show();
+                    textFabSearch.setVisibility(View.VISIBLE);
+                    textFabNew.setVisibility(View.VISIBLE);
+                    subFabVisible = true;
+                } else {
+                    notesFloatSearch.hide();
+                    notesFloatNew.hide();
+                    textFabSearch.setVisibility(View.GONE);
+                    textFabNew.setVisibility(View.GONE);
+                    subFabVisible = false;
+                }
+            }
+        });
+        notesFloatSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (notesFullListSearch.getVisibility() == View.VISIBLE) {
+                    Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fragment_fade_exit);
+                    anim.setStartOffset(75);
+                    notesFullListSearch.setAnimation(anim);
+                    notesFullListSearch.setVisibility(View.GONE);
+                } else {
+                    Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fragment_fade_enter);
+                    anim.setStartOffset(75);
+                    notesFullListSearch.setAnimation(anim);
+                    notesFullListSearch.setVisibility(View.VISIBLE);
+                }
+                notesFullListFloatingActionButton.performClick();
+            }
+        });
     }
 
     //fingerprint prompt Info
@@ -245,20 +323,34 @@ public class NotesListViewActivity extends AppCompatActivity {
             .setDescription("This note is LOCKED. \r\nPlease using your biometric credential to continue.")
             .setNegativeButtonText("Cancel").build();
 
-    private void setupGridView() {
+    private void setupGridView(List<NoteModelObject> filterList) {
         //setup custom Adapter
-        for (NoteModelObject noteModelObject : noteModelObjectList) {
-            if (noteModelObject.isPaint()) {
-                Bitmap paint = ImageConvertUtils.convertStringToBitmap(noteModelObject.getContent());
-                if (noteModelObject.isPinLock() || noteModelObject.isFPLock()) {
-                    noteModelObject.setGridViewPaint(blurUtils.fastBlur(paint, 0.75f, 50));
-                } else {
-                    noteModelObject.setGridViewPaint(paint);
+        if (filterList == null || filterList.isEmpty()) {
+            for (NoteModelObject noteModelObject : noteModelObjectList) {
+                if (noteModelObject.isPaint()) {
+                    Bitmap paint = ImageConvertUtils.convertStringToBitmap(noteModelObject.getContent());
+                    if (noteModelObject.isPinLock() || noteModelObject.isFPLock()) {
+                        noteModelObject.setGridViewPaint(blurUtils.fastBlur(paint, 0.75f, 50));
+                    } else {
+                        noteModelObject.setGridViewPaint(paint);
+                    }
                 }
             }
+            notesFullListGridAdapter = new NotesFullListGridAdapter(getApplicationContext(), noteModelObjectList);
+        } else {
+            for (NoteModelObject noteModelObject : filterList) {
+                if (noteModelObject.isPaint()) {
+                    Bitmap paint = ImageConvertUtils.convertStringToBitmap(noteModelObject.getContent());
+                    if (noteModelObject.isPinLock() || noteModelObject.isFPLock()) {
+                        noteModelObject.setGridViewPaint(blurUtils.fastBlur(paint, 0.75f, 50));
+                    } else {
+                        noteModelObject.setGridViewPaint(paint);
+                    }
+                }
+            }
+            notesFullListGridAdapter = new NotesFullListGridAdapter(getApplicationContext(), filterList);
         }
-//        Log.v("TASK", noteModelObjectList.toString());
-        notesFullListGridAdapter = new NotesFullListGridAdapter(getApplicationContext(), noteModelObjectList);
+
         //setup GridView
         GridView notesFullListGrid = (GridView) findViewById(R.id.notesFullListGrid);
         notesFullListGrid.setAdapter(notesFullListGridAdapter);

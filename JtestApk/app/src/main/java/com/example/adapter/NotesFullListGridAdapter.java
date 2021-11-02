@@ -7,7 +7,10 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -135,6 +138,9 @@ public class NotesFullListGridAdapter extends BaseAdapter {
                 gridNoteTaskTable.setVisibility(View.GONE);
             }
         }
+        Animation anim = AnimationUtils.loadAnimation(context,R.anim.fragment_fade_enter);
+        anim.setStartOffset(75);
+        view.setAnimation(anim);
         return view;
     }
 

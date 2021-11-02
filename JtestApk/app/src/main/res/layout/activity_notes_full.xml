@@ -6,12 +6,14 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.textfield.TextInputLayout
+        android:visibility="gone"
         android:id="@+id/notesFullListSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/notesSearchInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/input_note_hint_search" />
@@ -45,5 +47,65 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:horizontalSpacing="10dp"
         android:verticalSpacing="10dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/notesFullListFloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@android:drawable/ic_input_add"
+        android:layout_margin="24dp"
+        app:fabSize="normal"
+        android:contentDescription="TODO"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:visibility="gone"
+        android:id="@+id/notesFloatSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        app:fabSize="mini"
+        android:src="@android:drawable/ic_menu_search"
+        android:layout_margin="24dp"
+        android:contentDescription="TODO"
+        app:layout_constraintBottom_toTopOf="@+id/notesFullListFloatingActionButton"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/textFabSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#CC000000"
+        android:padding="4dp"
+        android:text="Search"
+        app:layout_constraintBottom_toBottomOf="@+id/notesFloatSearch"
+        app:layout_constraintEnd_toStartOf="@+id/notesFloatSearch"
+        app:layout_constraintTop_toTopOf="@+id/notesFloatSearch" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:visibility="gone"
+        android:id="@+id/notesFloatNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        app:fabSize="mini"
+        android:src="@android:drawable/ic_menu_edit"
+        android:layout_margin="24dp"
+        android:contentDescription="TODO"
+        app:layout_constraintBottom_toTopOf="@+id/notesFloatSearch"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/textFabNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#CC000000"
+        android:padding="4dp"
+        android:text="New"
+        app:layout_constraintBottom_toBottomOf="@+id/notesFloatNew"
+        app:layout_constraintEnd_toStartOf="@+id/notesFloatNew"
+        app:layout_constraintTop_toTopOf="@+id/notesFloatNew" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
