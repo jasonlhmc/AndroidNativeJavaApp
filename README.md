@@ -35,18 +35,19 @@ e.g.
 ．Sub total display as the hint above the input field when "CAL!" button pressed  
 
 ## QR Code Scanner:  
+> ．*NEW* Added track code remove function when QR Code is url  
+> ．*NEW* Implement [Google Safe Browsing API](https://developer.android.com/training/safetynet/safebrowsing#java) to lookup the url before the webView load it  
+>  ^ All these implementations affected to main scanner and Read QR Code from image in sub menu
+
+> Working on "Copy to clipboard" function  
+
 ．Using ZXING: https://github.com/zxing/zxing  
-．Instant open webview or text depends on QR Code source(text/url)  
-．*NEW* Added track code remove function when QR Code is url  
-．*NEW* Implement [Google Safe Browsing API](https://developer.android.com/training/safetynet/safebrowsing#java) to check the url  
+．Instant open webview or text depends on QR Code source(text/url)   
 ．Long press for submenu  
 -generate QR Code  
 ．Input text/url to generate QR Code reactively  
 -Read QR Code from image  
 ．Perform action like QR Code Scanner when the image contain QR Code  
-．*NEW* Added track code remove function when QR Code is url  
-．*NEW* Implement [Google Safe Browsing API](https://developer.android.com/training/safetynet/safebrowsing#java) to check the url  
-> Working on add to clipboard function
 
 ## Jot Notes:
 ．Using MongoDB & MongoDB Realm:  
