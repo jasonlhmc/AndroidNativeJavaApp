@@ -90,3 +90,9 @@ line4line4line4
 > ~~Working on~~ ✓DONE security of the notes, add isLocked indicator for grand read/write/delete permission after fingerprint validation if set in the note(in More option button: :arrow_up_small:)  
 ^ More Info : ✓DONE not only fingerprint authentication, but also pin password for note added: both method can use together  
 ^ More Info+: ~~trying to~~ ✓DONE implement blur image for locked Drawing note, text note content will be replace will *    
+
+## More info: 
+Please also check my [Python Telegrom Bot](https://github.com/jasonlhmc/telegramBot_git/tree/main) repository  
+> ．retrieving notes in MongoDB using Telegram  
+> ．listed as reply keyboard in Telegram chat and select to view the content  
+> ．can view both Text and Paint note, bot will send as text or photo  
