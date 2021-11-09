@@ -172,8 +172,8 @@ public class QRCodeSubMenuActivity extends AppCompatActivity {
                         Matcher matcher = pattern.matcher(result);
                         if (matcher.find()) {
                             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(QRCodeSubMenuActivity.this);
-                            dialogBuilder.setTitle("UTM track code found");
-                            dialogBuilder.setMessage("Do you want to remove utm parameter in the url?");
+                            dialogBuilder.setTitle(getResources().getString(R.string.dialog_msg_utm));
+                            dialogBuilder.setMessage(getResources().getString(R.string.dialog_msg_utm));
                             dialogBuilder.setPositiveButton(getResources().getString(R.string.dialog_positive), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -194,8 +194,8 @@ public class QRCodeSubMenuActivity extends AppCompatActivity {
                         }
                     } else {
                         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(QRCodeSubMenuActivity.this);
-                        dialogBuilder.setTitle("THREATS FOUND via Google Safe Browsing API");
-                        dialogBuilder.setMessage("[NO]Discard and Back is HIGHLY RECOMMENDED. \r\n[YES]Go into the url AS YOUR OWN RISK.");
+                        dialogBuilder.setTitle(getResources().getString(R.string.dialog_title_safe_browsing));
+                        dialogBuilder.setMessage(getResources().getString(R.string.dialog_msg_safe_browsing));
                         dialogBuilder.setPositiveButton(getResources().getString(R.string.dialog_positive), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

@@ -26,14 +26,10 @@ import com.google.android.gms.safetynet.SafetyNet;
 import com.google.android.gms.safetynet.SafetyNetApi;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Tasks;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import org.bson.Document;
-
 import java.util.Properties;
-import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -94,8 +90,8 @@ public class QRCodeActivity extends AppCompatActivity {
                                 Matcher matcher = pattern.matcher(result.getContents());
                                 if (matcher.find()) {
                                     AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(QRCodeActivity.this);
-                                    dialogBuilder.setTitle("UTM track code found");
-                                    dialogBuilder.setMessage("Do you want to remove utm parameter in the url?");
+                                    dialogBuilder.setTitle(getResources().getString(R.string.dialog_msg_utm));
+                                    dialogBuilder.setMessage(getResources().getString(R.string.dialog_msg_utm));
                                     dialogBuilder.setPositiveButton(getResources().getString(R.string.dialog_positive), new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -116,8 +112,8 @@ public class QRCodeActivity extends AppCompatActivity {
                                 }
                             } else {
                                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(QRCodeActivity.this);
-                                dialogBuilder.setTitle("THREATS FOUND via Google Safe Browsing API");
-                                dialogBuilder.setMessage("[NO]Discard and Back is HIGHLY RECOMMENDED. \r\n[YES]Go into the url AS YOUR OWN RISK.");
+                                dialogBuilder.setTitle(getResources().getString(R.string.dialog_title_safe_browsing));
+                                dialogBuilder.setMessage(getResources().getString(R.string.dialog_msg_safe_browsing));
                                 dialogBuilder.setPositiveButton(getResources().getString(R.string.dialog_positive), new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -147,7 +143,6 @@ public class QRCodeActivity extends AppCompatActivity {
                                 Log.d("SafetyNet FAILED", "Error: " + e.getMessage());
                                 Toast.makeText(getApplicationContext(), "SafetyNet FAILED: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                            finish();
                         }
                     });
                     setContentView(webView);

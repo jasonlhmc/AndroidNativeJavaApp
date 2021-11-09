@@ -4,8 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,8 +15,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
@@ -34,9 +32,9 @@ import androidx.core.content.ContextCompat;
 import com.example.adapter.NotesFullListGridAdapter;
 import com.example.model.NoteModelObject;
 import com.example.utils.BlurUtils;
+import com.example.utils.CustomAnimationUtils;
 import com.example.utils.EncryptDecryptUtil;
 import com.example.utils.ImageConvertUtils;
-import com.example.utils.PropertiesUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -49,14 +47,12 @@ import org.bson.BsonInt32;
 import org.bson.Document;
 
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Properties;
 import java.util.concurrent.Executor;
 
 import io.realm.Realm;
@@ -71,7 +67,7 @@ import io.realm.mongodb.mongo.iterable.MongoCursor;
 
 public class NotesListViewActivity extends AppCompatActivity {
 
-    private Properties appProperties;
+    private SharedPreferences sharedPrefMongoDb;
 
     private App mongoApp;
     private User mongoUser;
@@ -84,7 +80,7 @@ public class NotesListViewActivity extends AppCompatActivity {
     private List<NoteModelObject> noteSearchList;
 
     private NotesFullListGridAdapter notesFullListGridAdapter;
-    private FloatingActionButton notesFullListFloatingActionButton, notesFloatSearch, notesFloatNew;
+    private FloatingActionButton commonFab, notesFloatSearch, notesFloatNew;
     boolean subFabVisible;
     private TextView textFabSearch, textFabNew;
     private TextInputLayout notesFullListSearch;
@@ -108,6 +104,7 @@ public class NotesListViewActivity extends AppCompatActivity {
     private boolean isDeleteNoteEvent;
 
     BlurUtils blurUtils = new BlurUtils();
+    CustomAnimationUtils customAnimationUtils = new CustomAnimationUtils();
 
     private LayoutInflater inflater;
 
@@ -115,15 +112,6 @@ public class NotesListViewActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
-
-        //get app.properties
-        try {
-            appProperties = PropertiesUtils.getAppProperties(getApplicationContext());
-        } catch (Exception e) {
-            e.printStackTrace();
-            finish();
-            return;
-        }
 
         //init variable
         isPinLock = false;
@@ -174,25 +162,18 @@ public class NotesListViewActivity extends AppCompatActivity {
             }
         });
 
+        //init sharedPref
+        sharedPrefMongoDb = getSharedPreferences("MongoDb", MODE_PRIVATE);
+
         //init MongoDB Connection
         Realm.init(this);
-        String appID = appProperties.getProperty("mongoDB.appId");
+        String appID = sharedPrefMongoDb.getString("mongoDB.appId", "");
         mongoApp = new App(new AppConfiguration.Builder(appID).build());
-//        Credentials credentials = Credentials.apiKey("DEwFRdullYJKDibKqvxQ6XuoJRc4xKBN52WGZHC6jHK14frFLItXjq1LMw0002Gz");
-//        AtomicReference<User> authUser = new AtomicReference<User>();
-//        app.loginAsync(credentials, it -> {
-//            if (it.isSuccess()) {
-//                Log.v("AUTH", "Successfully authenticated using an API Key.");
-//                authUser.set(app.currentUser());
-//            } else {
-//                Log.e("AUTH", it.getError().toString());
-//            }
-//        });
         mongoUser = mongoApp.currentUser();
-        mongoClient = mongoUser.getMongoClient(appProperties.getProperty("mongoDB.client"));
-        javaApplicationDB = mongoClient.getDatabase(appProperties.getProperty("mongoDB.database"));
-        notesFromAndroidAppCollection = javaApplicationDB.getCollection(appProperties.getProperty("mongoDB.collection.notes"));
-        keyCollection = javaApplicationDB.getCollection(appProperties.getProperty("mongoDB.collection.key"));
+        mongoClient = mongoUser.getMongoClient(sharedPrefMongoDb.getString("mongoDB.client", ""));
+        javaApplicationDB = mongoClient.getDatabase(sharedPrefMongoDb.getString("mongoDB.database", ""));
+        notesFromAndroidAppCollection = javaApplicationDB.getCollection(sharedPrefMongoDb.getString("mongoDB.collection.notes", ""));
+        keyCollection = javaApplicationDB.getCollection(sharedPrefMongoDb.getString("mongoDB.collection.key", ""));
         //Get all notes from MongoDB
         noteModelObjectList = new ArrayList<NoteModelObject>();
 //        resultJsonList = new ArrayList<String>();
@@ -227,6 +208,8 @@ public class NotesListViewActivity extends AppCompatActivity {
                 loadingNotesList.setVisibility(View.INVISIBLE);
             } else {
                 Log.e("EXAMPLE", "failed to find document with: ", task.getError());
+                finish();
+                Toast.makeText(getApplicationContext(),"Failed to find data: \r\n" + task.getError().getErrorMessage(), Toast.LENGTH_LONG).show();
             }
         });
         //get key from server for generate encrypted pin
@@ -246,6 +229,8 @@ public class NotesListViewActivity extends AppCompatActivity {
             } else {
                 foundKey = false;
                 Log.e("EXAMPLE", "failed to find key");
+                finish();
+                Toast.makeText(getApplicationContext(),"Key not found: \r\n" + task.getError().getErrorMessage(), Toast.LENGTH_LONG).show();
             }
         });
         setContentView(R.layout.activity_notes_full);
@@ -277,10 +262,10 @@ public class NotesListViewActivity extends AppCompatActivity {
         subFabVisible = false;
         textFabSearch = (TextView) findViewById(R.id.textFabSearch);
         textFabNew = (TextView) findViewById(R.id.textFabNew);
-        notesFullListFloatingActionButton = (FloatingActionButton) findViewById(R.id.notesFullListFloatingActionButton);
+        commonFab = (FloatingActionButton) findViewById(R.id.commonFab);
         notesFloatSearch = (FloatingActionButton) findViewById(R.id.notesFloatSearch);
         notesFloatNew = (FloatingActionButton) findViewById(R.id.notesFloatNew);
-        notesFullListFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+        commonFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!subFabVisible) {
@@ -302,17 +287,21 @@ public class NotesListViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (notesFullListSearch.getVisibility() == View.VISIBLE) {
-                    Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fragment_fade_exit);
-                    anim.setStartOffset(75);
-                    notesFullListSearch.setAnimation(anim);
+                    notesFullListSearch.setAnimation(customAnimationUtils.fadeInAnimationDefault(getApplicationContext()));
                     notesFullListSearch.setVisibility(View.GONE);
                 } else {
-                    Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fragment_fade_enter);
-                    anim.setStartOffset(75);
-                    notesFullListSearch.setAnimation(anim);
+                    notesFullListSearch.setAnimation(customAnimationUtils.fadeInAnimationDefault(getApplicationContext()));
                     notesFullListSearch.setVisibility(View.VISIBLE);
                 }
-                notesFullListFloatingActionButton.performClick();
+                commonFab.performClick();
+            }
+        });
+        notesFloatNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NotesListViewActivity.this, NotesActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

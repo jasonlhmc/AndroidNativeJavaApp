@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -44,9 +45,7 @@ import org.bson.Document;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import io.realm.Realm;
@@ -62,6 +61,7 @@ import io.realm.mongodb.mongo.iterable.MongoCursor;
 public class NotesActivity extends AppCompatActivity {
 
     private Properties appProperties;
+    private SharedPreferences sharedPrefMongoDb;
 
     private static final int CONTEXT_MENU_ADD_TASK = 1;
     private static final int CONTEXT_MENU_ADD_TASK_TEST = 99;
@@ -127,19 +127,22 @@ public class NotesActivity extends AppCompatActivity {
             return;
         }
 
+        //init sharedPref
+        sharedPrefMongoDb = getSharedPreferences("MongoDb", MODE_PRIVATE);
+
         //init inflater
         inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         //init MongoDB Connection
         foundKey = false;
         Realm.init(this);
-        String appID = appProperties.getProperty("mongoDB.appId");
+        String appID = sharedPrefMongoDb.getString("mongoDB.appId", "");
         mongoApp = new App(new AppConfiguration.Builder(appID).build());
         mongoUser = mongoApp.currentUser();
-        mongoClient = mongoUser.getMongoClient(appProperties.getProperty("mongoDB.client"));
-        javaApplicationDB = mongoClient.getDatabase(appProperties.getProperty("mongoDB.database"));
-        notesFromAndroidAppCollection = javaApplicationDB.getCollection(appProperties.getProperty("mongoDB.collection.notes"));
-        keyCollection = javaApplicationDB.getCollection(appProperties.getProperty("mongoDB.collection.key"));
+        mongoClient = mongoUser.getMongoClient(sharedPrefMongoDb.getString("mongoDB.client", ""));
+        javaApplicationDB = mongoClient.getDatabase(sharedPrefMongoDb.getString("mongoDB.database", ""));
+        notesFromAndroidAppCollection = javaApplicationDB.getCollection(sharedPrefMongoDb.getString("mongoDB.collection.notes", ""));
+        keyCollection = javaApplicationDB.getCollection(sharedPrefMongoDb.getString("mongoDB.collection.key", ""));
         //get key from server for generate encrypted pin
         Document queryFilter  = new Document();
         RealmResultTask<MongoCursor<Document>> findTask = keyCollection.find(queryFilter).projection(new BsonDocument("_id", new BsonInt32(0))).iterator();
@@ -157,6 +160,8 @@ public class NotesActivity extends AppCompatActivity {
             } else {
                 foundKey = false;
                 Log.e("EXAMPLE", "failed to find key");
+                Toast.makeText(getApplicationContext(),"Key not found: \r\n" + task.getError().getErrorMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"PIN Lock for notes Disabled", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -204,8 +209,8 @@ public class NotesActivity extends AppCompatActivity {
                 PopupMenu popupMenu = new PopupMenu(NotesActivity.this, moreActionNotesButton);
                 popupMenu.getMenu().add(Menu.NONE, CONTEXT_MENU_ADD_TASK, Menu.NONE, "Add Task");
                 popupMenu.getMenu().add(Menu.NONE, CONTEXT_MENU_ADD_TASK_TEST, Menu.NONE, "Add Task TEST");
-                SubMenu subMenuEmbed = popupMenu.getMenu().addSubMenu(Menu.NONE, CONTEXT_MENU_EMBED, Menu.NONE, "Embed");
-                subMenuEmbed.add(Menu.NONE, CONTEXT_MENU_EMBED_PAINTS, Menu.NONE, "Embed a Paint");
+//                SubMenu subMenuEmbed = popupMenu.getMenu().addSubMenu(Menu.NONE, CONTEXT_MENU_EMBED, Menu.NONE, "Embed");
+//                subMenuEmbed.add(Menu.NONE, CONTEXT_MENU_EMBED_PAINTS, Menu.NONE, "Embed a Paint");
                 SubMenu subMenuLock = popupMenu.getMenu().addSubMenu(Menu.NONE, CONTEXT_MENU_LOCK, Menu.NONE, "Lock");
                 if (foundKey) {
                     subMenuLock.add(Menu.NONE, CONTEXT_MENU_LOCK_PIN, Menu.NONE, "Lock With PIN");
@@ -213,7 +218,7 @@ public class NotesActivity extends AppCompatActivity {
                     subMenuLock.add(Menu.NONE, CONTEXT_MENU_LOCK_PIN, Menu.NONE, "Lock With PIN").setEnabled(false);
                 }
                 subMenuLock.add(Menu.NONE, CONTEXT_MENU_LOCK_FP, Menu.NONE, "Lock With Fingerprint");
-                subMenuLock.add(Menu.NONE, CONTEXT_MENU_LOCK_OPTION, Menu.NONE, "Lock Option");
+//                subMenuLock.add(Menu.NONE, CONTEXT_MENU_LOCK_OPTION, Menu.NONE, "Lock Option");
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
@@ -302,6 +307,7 @@ public class NotesActivity extends AppCompatActivity {
         submitNotesButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                submitNotesButton.setEnabled(false);
                 if (!isTitleOrContentEmpty()) {
                     if (isEdit) {
                         Document queryFilter = new Document("dateStr", resultNoteObj.getDateStr());
@@ -315,6 +321,7 @@ public class NotesActivity extends AppCompatActivity {
                             } else {
                                 Log.e("EXAMPLE", "failed to update document with: ", task.getError());
                                 Toast.makeText(getApplicationContext(),"Upload Failed: " + task.getError(), Toast.LENGTH_SHORT).show();
+                                submitNotesButton.setEnabled(true);
                             }
                         });
                     } else {
@@ -326,10 +333,12 @@ public class NotesActivity extends AppCompatActivity {
                             } else {
                                 Log.e("EXAMPLE", "failed to insert documents with: ", task.getError());
                                 Toast.makeText(getApplicationContext(),"Upload Failed: " + task.getError(), Toast.LENGTH_SHORT).show();
+                                submitNotesButton.setEnabled(true);
                             }
                         });
                     }
                 } else {
+                    submitNotesButton.setEnabled(true);
                     Toast.makeText(getApplicationContext(),"Empty Title or Content.", Toast.LENGTH_SHORT).show();
                 }
             }

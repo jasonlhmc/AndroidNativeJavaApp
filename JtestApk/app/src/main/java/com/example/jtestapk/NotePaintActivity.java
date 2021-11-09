@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
@@ -71,9 +72,9 @@ import io.realm.mongodb.mongo.iterable.MongoCursor;
 public class NotePaintActivity extends AppCompatActivity implements ColorPickerDialog.OnColorChangedListener {
 
     private Properties appProperties;
+    private SharedPreferences sharedPrefMongoDb;
 
     MyView mv;
-    AlertDialog dialog;
     private ConstraintLayout constraintLayout;
     private View seekBarView;
     private int strokeWidth = 15;
@@ -150,16 +151,19 @@ public class NotePaintActivity extends AppCompatActivity implements ColorPickerD
             return;
         }
 
+        //init sharedPref
+        sharedPrefMongoDb = getSharedPreferences("MongoDb", MODE_PRIVATE);
+
         //init MongoDB Connection
         foundKey = false;
         Realm.init(this);
-        String appID = appProperties.getProperty("mongoDB.appId");
+        String appID = sharedPrefMongoDb.getString("mongoDB.appId", "");
         mongoApp = new App(new AppConfiguration.Builder(appID).build());
         mongoUser = mongoApp.currentUser();
-        mongoClient = mongoUser.getMongoClient(appProperties.getProperty("mongoDB.client"));
-        javaApplicationDB = mongoClient.getDatabase(appProperties.getProperty("mongoDB.database"));
-        notesFromAndroidAppCollection = javaApplicationDB.getCollection(appProperties.getProperty("mongoDB.collection.notes"));
-        keyCollection = javaApplicationDB.getCollection(appProperties.getProperty("mongoDB.collection.key"));
+        mongoClient = mongoUser.getMongoClient(sharedPrefMongoDb.getString("mongoDB.client", ""));
+        javaApplicationDB = mongoClient.getDatabase(sharedPrefMongoDb.getString("mongoDB.database", ""));
+        notesFromAndroidAppCollection = javaApplicationDB.getCollection(sharedPrefMongoDb.getString("mongoDB.collection.notes", ""));
+        keyCollection = javaApplicationDB.getCollection(sharedPrefMongoDb.getString("mongoDB.collection.key", ""));
         //get key from server for generate encrypted pin
         Document queryFilter  = new Document();
         RealmResultTask<MongoCursor<Document>> findTask = keyCollection.find(queryFilter).projection(new BsonDocument("_id", new BsonInt32(0))).iterator();
@@ -176,6 +180,8 @@ public class NotePaintActivity extends AppCompatActivity implements ColorPickerD
             } else {
                 foundKey = false;
                 Log.e("EXAMPLE", "failed to find key");
+                Toast.makeText(getApplicationContext(),"Key not found: \r\n" + task.getError().getErrorMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"PIN Lock for notes Disabled", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -298,12 +304,11 @@ public class NotePaintActivity extends AppCompatActivity implements ColorPickerD
         submitNotesButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                if (!isDrew) {
-                    submitNotesButton.setEnabled(false);
-                }
+                submitNotesButton.setEnabled(false);
                 if (isEdit) {
                     if (!isDrew) {
                         Toast.makeText(getApplicationContext(), "No change.", Toast.LENGTH_SHORT).show();
+                        submitNotesButton.setEnabled(true);
                         return;
                     }
                     Document queryFilter = new Document("dateStr", resultNoteObj.getDateStr());
@@ -317,10 +322,12 @@ public class NotePaintActivity extends AppCompatActivity implements ColorPickerD
                         } else {
                             Log.e("EXAMPLE", "failed to update document with: ", task.getError());
                             Toast.makeText(getApplicationContext(),"Upload Failed: " + task.getError(), Toast.LENGTH_SHORT).show();
+                            submitNotesButton.setEnabled(true);
                         }
                     });
                 } else {
                     if (!isDrew) {
+                        submitNotesButton.setEnabled(true);
                         Toast.makeText(getApplicationContext(), "Cannot submit empty paint.", Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -332,6 +339,7 @@ public class NotePaintActivity extends AppCompatActivity implements ColorPickerD
                         } else {
                             Log.e("EXAMPLE", "failed to insert documents with: ", task.getError());
                             Toast.makeText(getApplicationContext(),"Upload Failed: " + task.getError(), Toast.LENGTH_SHORT).show();
+                            submitNotesButton.setEnabled(true);
                         }
                     });
                 }

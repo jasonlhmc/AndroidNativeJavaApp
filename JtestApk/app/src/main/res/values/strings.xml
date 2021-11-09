@@ -14,6 +14,10 @@
     <string name="button_gen_qrcode">Generate QR Code</string>
     <string name="button_read_image">Read QR Code From Image</string>
     <string name="hint_string_input">String Input</string>
+    <string name="dialog_title_utm">UTM track code found</string>
+    <string name="dialog_msg_utm">Do you want to remove utm parameter in the url?</string>
+    <string name="dialog_title_safe_browsing">THREATS FOUND via Google Safe Browsing API</string>
+    <string name="dialog_msg_safe_browsing">[NO]Discard and Back(HIGHLY RECOMMENDED) \n[YES]Go into the url AS YOUR OWN RISK.</string>
     <!-- Notes Activity -->
     <string name="grid_menu_delete">DELETE</string>
     <string name="dialog_delete_title">DELETE record in database</string>
@@ -48,6 +52,12 @@
 
     <!-- Layout xml -->
     <string name="row_cancel">❎</string>
+    <!-- Main Menu Activity -->
+    <string name="fab_text_menu_translate">Translate</string>
+    <string name="fab_text_menu_check_cur">Check Currency</string>
+    <string name="fab_text_menu_qr_code">QR Code Scanner</string>
+    <string name="fab_text_menu_notes">Jot Notes</string>
+    <string name="fab_text_menu_setting">App Setting</string>
     <!-- Currency Activity -->
     <string name="input_cur_code_name">Currency Code/Currency Name</string>
     <string name="button_cur_cal">CAL!</string>
@@ -72,11 +82,30 @@
     <string name="input_task">Task</string>
     <string name="toggle_task_on">⭕️</string>
     <string name="toggle_task_off">❌</string>
+    <string name="fab_text_notes_search">Search</string>
+    <string name="fab_text_notes_new">New</string>
     <!-- note_tools_layout -->
     <string name="button_note_tools_more">&#128316;</string>
-    <string name="button_note_tools_switch">&#128221;</string>
+    <string name="button_note_tools_switch">🔄</string>
     <!-- Layout xml -->
     <!-- note_pin_input -->
     <string name="text_note_pin_msg">Input you pin below:</string>
     <string name="input_note_pin_hint">PIN</string>
+    <!-- Menu Popup -->
+    <string name="text_setting_api_key">mongoDB.auth.api.key</string>
+    <string name="text_setting_api_key_desc">(For authenticating users. Cannot use notes function otherwise)</string>
+    <string name="text_setting_app_id">mongoDB.appId</string>
+    <string name="text_setting_app_id_desc">(Enter your MongoDB Realm Applications ID below)</string>
+    <string name="text_setting_client">mongoDB.client</string>
+    <string name="text_setting_client_desc">(Using mongodb-atlas mostly)</string>
+    <string name="text_setting_database">mongoDB.database</string>
+    <string name="text_setting_database_desc">(Enter your Database name below)</string>
+    <string name="text_setting_collection_notes">mongoDB.collection.notes</string>
+    <string name="text_setting_collection_notes_desc">(Collection name inside the Database for storing notes)</string>
+    <string name="text_setting_collection_key">mongoDB.collection.key</string>
+    <string name="text_setting_collection_key_desc">(Collection name inside the Database for storing key)</string>
+    <string name="text_setting_prompt">! Invalid input found and highlighted !</string>
+    <string name="text_setting_info">INFO: Press SAVE will also perform Authentication.</string>
+    <string name="btn_setting_save">SAVE</string>
+    <string name="btn_setting_clear">CLEAR</string>
 </resources>

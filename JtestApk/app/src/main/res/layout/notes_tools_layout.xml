@@ -10,35 +10,29 @@
 
         <Button
             android:id="@+id/moreActionNotesButton"
-            android:layout_width="40dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.05"
-            android:text="@string/button_note_tools_more"
-            android:shadowColor="@android:color/darker_gray"
-            android:shadowDx="2"
-            android:shadowDy="2"
-            android:shadowRadius="4" />
+            android:layout_weight="0.12"
+            android:background="@drawable/ic_baseline_more_horiz_24" />
 
         <Button
             android:id="@+id/submitNotesButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/button_save_submit"
-            android:shadowColor="@android:color/darker_gray"
-            android:shadowDx="2"
-            android:shadowDy="2"
-            android:shadowRadius="4"
-            android:layout_weight="0.9"/>
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:background="#CC000000"
+            android:drawableLeft="@drawable/ic_baseline_save_24"
+            android:drawableRight="@drawable/ic_baseline_cloud_upload_24"
+            android:textStyle="bold"
+            android:layout_weight="0.76"/>
 
         <Button
             android:id="@+id/switchNotesButton"
-            android:layout_width="40dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/button_note_tools_switch"
-            android:shadowColor="@android:color/darker_gray"
-            android:shadowDx="2"
-            android:shadowDy="2"
-            android:shadowRadius="4"
-            android:layout_weight="0.05"/>
+            android:background="@drawable/ic_baseline_swap_horiz_24"
+            android:layout_weight="0.12"/>
 
 </LinearLayout>

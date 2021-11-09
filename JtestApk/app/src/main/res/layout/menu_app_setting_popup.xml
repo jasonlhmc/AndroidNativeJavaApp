@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:orientation="vertical"
+        android:background="@drawable/common_table_border">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:padding="4dp"
+            android:text="@string/text_setting_api_key"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:text="@string/text_setting_api_key_desc"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/settingMongoApiKey"
+            android:inputType="text"
+            android:background="@drawable/view_underline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:padding="4dp"
+            android:text="@string/text_setting_app_id"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:text="@string/text_setting_app_id_desc"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/settingMongoAppId"
+            android:inputType="text"
+            android:background="@drawable/view_underline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:padding="4dp"
+            android:text="@string/text_setting_client"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:text="@string/text_setting_client_desc"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/settingMongoClient"
+            android:inputType="text"
+            android:background="@drawable/view_underline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:padding="4dp"
+            android:text="@string/text_setting_database"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:text="@string/text_setting_database_desc"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/settingMongoDatabase"
+            android:inputType="text"
+            android:background="@drawable/view_underline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:padding="4dp"
+            android:text="@string/text_setting_collection_notes"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:text="@string/text_setting_collection_notes_desc"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/settingColNotes"
+            android:inputType="text"
+            android:background="@drawable/view_underline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:padding="4dp"
+            android:text="@string/text_setting_collection_key"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:text="@string/text_setting_collection_key_desc"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/settingColKey"
+            android:inputType="text"
+            android:background="@drawable/view_underline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:visibility="invisible"
+            android:id="@+id/settingPrompt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:gravity="center"
+            android:text="@string/text_setting_prompt"/>
+
+        <TextView
+            android:id="@+id/settingInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:gravity="center"
+            android:text="@string/text_setting_info"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+            <Button
+                android:id="@+id/settingSaveBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#CC000000"
+                android:layout_margin="2dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:text="@string/btn_setting_save"/>
+            <Space
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="match_parent" />
+            <Button
+                android:id="@+id/settingClearBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#CC000000"
+                android:layout_margin="2dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:text="@string/btn_setting_clear" />
+            <Space
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="match_parent" />
+            <Button
+                android:id="@+id/settingCancelBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#CC000000"
+                android:layout_margin="2dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:text="@android:string/cancel" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

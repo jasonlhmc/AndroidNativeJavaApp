@@ -1,16 +1,11 @@
 package com.example.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -19,19 +14,18 @@ import android.widget.TextView;
 import com.example.jtestapk.R;
 import com.example.model.NoteModelObject;
 import com.example.model.NoteTaskObject;
-import com.example.utils.BlurUtils;
+import com.example.utils.CustomAnimationUtils;
 
-import org.w3c.dom.Text;
-
-import java.util.Base64;
 import java.util.List;
 
 public class NotesFullListGridAdapter extends BaseAdapter {
 
-    BlurUtils blurUtils = new BlurUtils();
     Context context;
     List<NoteModelObject> noteModelObjectList;
     LayoutInflater inflater;
+
+    CustomAnimationUtils customAnimationUtils = new CustomAnimationUtils();
+
     public NotesFullListGridAdapter(Context applicationContext, List<NoteModelObject> noteModelObjectList) {
         this.context = applicationContext;
         this.noteModelObjectList = noteModelObjectList;
@@ -138,9 +132,7 @@ public class NotesFullListGridAdapter extends BaseAdapter {
                 gridNoteTaskTable.setVisibility(View.GONE);
             }
         }
-        Animation anim = AnimationUtils.loadAnimation(context,R.anim.fragment_fade_enter);
-        anim.setStartOffset(75);
-        view.setAnimation(anim);
+        view.setAnimation(customAnimationUtils.fadeInAnimationDefault(context));
         return view;
     }
 

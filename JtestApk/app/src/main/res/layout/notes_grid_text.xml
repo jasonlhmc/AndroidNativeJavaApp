@@ -56,6 +56,3 @@
         app:layout_constraintBottom_toBottomOf="parent">
     </TableLayout>
 </LinearLayout>
-
-
-<!--    android:layout_weight="1"-->
