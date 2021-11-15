@@ -35,9 +35,18 @@ import com.example.utils.BlurUtils;
 import com.example.utils.CustomAnimationUtils;
 import com.example.utils.EncryptDecryptUtil;
 import com.example.utils.ImageConvertUtils;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -68,6 +77,7 @@ import io.realm.mongodb.mongo.iterable.MongoCursor;
 public class NotesListViewActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPrefMongoDb;
+    private SharedPreferences sharedPrefFirebase;
 
     private App mongoApp;
     private User mongoUser;
@@ -75,6 +85,10 @@ public class NotesListViewActivity extends AppCompatActivity {
     private MongoDatabase javaApplicationDB;
     private MongoCollection notesFromAndroidAppCollection;
     private MongoCollection keyCollection;
+
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
+    private DatabaseReference dataBaseRef;
 
     private List<NoteModelObject> noteModelObjectList;
     private List<NoteModelObject> noteSearchList;
@@ -85,11 +99,13 @@ public class NotesListViewActivity extends AppCompatActivity {
     private TextView textFabSearch, textFabNew;
     private TextInputLayout notesFullListSearch;
     private TextInputEditText notesSearchInput;
+    private FloatingActionButton notesFloatFirebase;
+    private TextView textFabFirebase;
 
 //    private List<String> resultJsonList;
     private Map<NoteModelObject, String> rsObjMap;
     private NoteModelObject selectedNote;
-    private ProgressBar loadingNotesList;
+    private ProgressBar commonProgressBar;
     private static final int DELETE_ACTION_CONTEXT_MENU = 1;
     private String deleteQueryKey;
 
@@ -164,7 +180,6 @@ public class NotesListViewActivity extends AppCompatActivity {
 
         //init sharedPref
         sharedPrefMongoDb = getSharedPreferences("MongoDb", MODE_PRIVATE);
-
         //init MongoDB Connection
         Realm.init(this);
         String appID = sharedPrefMongoDb.getString("mongoDB.appId", "");
@@ -205,7 +220,11 @@ public class NotesListViewActivity extends AppCompatActivity {
                 //init GridView
                 setupGridView(null);
                 //hide loading progressBar
-                loadingNotesList.setVisibility(View.INVISIBLE);
+                commonProgressBar.setVisibility(View.INVISIBLE);
+                //enable firebase fab
+                if (sharedPrefFirebase.getBoolean("isCompleted", false) && sharedPrefFirebase.getBoolean("isAuthenticated", false)) {
+                    notesFloatFirebase.setEnabled(true);
+                }
             } else {
                 Log.e("EXAMPLE", "failed to find document with: ", task.getError());
                 finish();
@@ -233,9 +252,55 @@ public class NotesListViewActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Key not found: \r\n" + task.getError().getErrorMessage(), Toast.LENGTH_LONG).show();
             }
         });
+
+        //test Firebase
+        sharedPrefFirebase = getSharedPreferences("firebase", MODE_PRIVATE);
+        if (!sharedPrefFirebase.getBoolean("isCompleted", false)) {
+            Toast.makeText(getApplicationContext(),"firebase setting not found", Toast.LENGTH_LONG).show();
+        } else {
+            FirebaseOptions options = new FirebaseOptions.Builder()
+                    .setProjectId(sharedPrefFirebase.getString("settingFirebaseProjectId", ""))
+                    .setApplicationId(sharedPrefFirebase.getString("settingFirebaseAppId", ""))
+                    .setApiKey(sharedPrefFirebase.getString("settingFirebaseApiKey", ""))
+                    .build();
+            FirebaseApp firebaseApp = null;
+            boolean initialized = false;
+            List<FirebaseApp> firebaseAppList = FirebaseApp.getApps(this);
+            for(FirebaseApp app : firebaseAppList){
+                if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME)){
+                    initialized=true;
+                    firebaseApp = app;
+                }
+            }
+            if(!initialized) {
+                firebaseApp = FirebaseApp.initializeApp(this, options);
+            }
+            //firebase auth
+            mAuth = FirebaseAuth.getInstance();
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+            mAuth.signInAnonymously().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d("FIREBASE", "signInAnonymously:success");
+                        sharedPrefFirebase.edit().putBoolean("isAuthenticated", true).apply();
+                        database = FirebaseDatabase.getInstance(sharedPrefFirebase.getString("settingFirebaseInstanceUrl", ""));
+                        dataBaseRef = database.getReference();
+                        notesFloatFirebase.setEnabled(true);
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w("FIREBASE", "signInAnonymously:failure", task.getException());
+                        sharedPrefFirebase.edit().putBoolean("isAuthenticated", false).apply();
+                    }
+                }
+            });
+        }
+
         setContentView(R.layout.activity_notes_full);
+
         //set loading screen
-        loadingNotesList = (ProgressBar) findViewById(R.id.loadingNotesList);
+        commonProgressBar = (ProgressBar) findViewById(R.id.commonProgressBar);
         notesFullListSearch = (TextInputLayout) findViewById(R.id.notesFullListSearch);
         notesSearchInput = (TextInputEditText) findViewById(R.id.notesSearchInput);
         notesSearchInput.addTextChangedListener(new TextWatcher() {
@@ -265,20 +330,53 @@ public class NotesListViewActivity extends AppCompatActivity {
         commonFab = (FloatingActionButton) findViewById(R.id.commonFab);
         notesFloatSearch = (FloatingActionButton) findViewById(R.id.notesFloatSearch);
         notesFloatNew = (FloatingActionButton) findViewById(R.id.notesFloatNew);
+        //setup sync button
+        notesFloatFirebase = (FloatingActionButton) findViewById(R.id.notesFloatFirebase);
+        textFabFirebase = (TextView) findViewById(R.id.textFabFirebase);
+        notesFloatFirebase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (dataBaseRef == null) {
+
+                } else {
+                    for (NoteModelObject noteModelObject : noteModelObjectList) {
+                        NoteModelObject firebaseObject = new NoteModelObject(
+                                noteModelObject.getContent(),
+                                noteModelObject.getDateStr(),
+                                noteModelObject.getEditDateStr(),
+                                noteModelObject.getTitle(),
+                                noteModelObject.isPaint(),
+                                noteModelObject.isFPLock(),
+                                noteModelObject.isPinLock(),
+                                noteModelObject.getEncryptedPin(),
+                                noteModelObject.isTask(),
+                                noteModelObject.getTaskList()
+
+                        );
+                        dataBaseRef.child(sharedPrefFirebase.getString("settingChildNotes", "")).child(noteModelObject.getDateStr()).setValue(firebaseObject);
+                    }
+                    dataBaseRef.child(sharedPrefFirebase.getString("settingChildKey", "")).child("key").setValue(onlineKey);
+                }
+            }
+        });
         commonFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!subFabVisible) {
                     notesFloatSearch.show();
                     notesFloatNew.show();
+                    notesFloatFirebase.show();
                     textFabSearch.setVisibility(View.VISIBLE);
                     textFabNew.setVisibility(View.VISIBLE);
+                    textFabFirebase.setVisibility(View.VISIBLE);
                     subFabVisible = true;
                 } else {
                     notesFloatSearch.hide();
                     notesFloatNew.hide();
+                    notesFloatFirebase.hide();
                     textFabSearch.setVisibility(View.GONE);
                     textFabNew.setVisibility(View.GONE);
+                    textFabFirebase.setVisibility(View.GONE);
                     subFabVisible = false;
                 }
             }

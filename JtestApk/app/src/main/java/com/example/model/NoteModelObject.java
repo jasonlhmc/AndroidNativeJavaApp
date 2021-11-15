@@ -26,6 +26,32 @@ public class NoteModelObject {
     private List<NoteTaskObject> taskList;
     private Bitmap gridViewPaint;
 
+    public NoteModelObject() {
+
+    }
+
+    public NoteModelObject(String content,
+                           String dateStr,
+                           String editDateStr,
+                           String title,
+                           boolean isPaint,
+                           boolean isFPLock,
+                           boolean isPinLock,
+                           String encryptedPin,
+                           boolean isTask,
+                           List<NoteTaskObject> taskList) {
+        this.content = content;
+        this.dateStr = dateStr;
+        this.editDateStr = editDateStr;
+        this.title = title;
+        this.isPaint = isPaint;
+        this.isFPLock = isFPLock;
+        this.isPinLock = isPinLock;
+        this.encryptedPin = encryptedPin;
+        this.isTask = isTask;
+        this.taskList = taskList;
+    }
+
     public String getContent() {
         return content;
     }

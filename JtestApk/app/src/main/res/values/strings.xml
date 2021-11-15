@@ -84,6 +84,7 @@
     <string name="toggle_task_off">❌</string>
     <string name="fab_text_notes_search">Search</string>
     <string name="fab_text_notes_new">New</string>
+    <string name="fab_text_notes_firebase">Firebase</string>
     <!-- note_tools_layout -->
     <string name="button_note_tools_more">&#128316;</string>
     <string name="button_note_tools_switch">🔄</string>
@@ -91,21 +92,47 @@
     <!-- note_pin_input -->
     <string name="text_note_pin_msg">Input you pin below:</string>
     <string name="input_note_pin_hint">PIN</string>
-    <!-- Menu Popup -->
-    <string name="text_setting_api_key">mongoDB.auth.api.key</string>
-    <string name="text_setting_api_key_desc">(For authenticating users. Cannot use notes function otherwise)</string>
-    <string name="text_setting_app_id">mongoDB.appId</string>
-    <string name="text_setting_app_id_desc">(Enter your MongoDB Realm Applications ID below)</string>
-    <string name="text_setting_client">mongoDB.client</string>
-    <string name="text_setting_client_desc">(Using mongodb-atlas mostly)</string>
-    <string name="text_setting_database">mongoDB.database</string>
-    <string name="text_setting_database_desc">(Enter your Database name below)</string>
-    <string name="text_setting_collection_notes">mongoDB.collection.notes</string>
-    <string name="text_setting_collection_notes_desc">(Collection name inside the Database for storing notes)</string>
-    <string name="text_setting_collection_key">mongoDB.collection.key</string>
-    <string name="text_setting_collection_key_desc">(Collection name inside the Database for storing key)</string>
+    <!-- App Setting Menu Popup -->
+    <!-- Setting Selection -->
+    <string name="menu_setting_mongodb">MongoDB Setting</string>
+    <string name="menu_setting_firebase">Firebase Setting</string>
+    <string name="menu_setting_google_api">Google API Setting</string>
     <string name="text_setting_prompt">! Invalid input found and highlighted !</string>
     <string name="text_setting_info">INFO: Press SAVE will also perform Authentication.</string>
     <string name="btn_setting_save">SAVE</string>
     <string name="btn_setting_clear">CLEAR</string>
+    <!-- MongoDB Setting -->
+    <string name="text_setting_mongodb_api_key">mongoDB.auth.api.key</string>
+    <string name="text_setting_mongodb_api_key_desc">(For authenticating users. Cannot use notes function otherwise)</string>
+    <string name="text_setting_mongodb_app_id">mongoDB.appId</string>
+    <string name="text_setting_mongodb_app_id_desc">(Enter your MongoDB Realm Applications ID below)</string>
+    <string name="text_setting_mongodb_client">mongoDB.client</string>
+    <string name="text_setting_mongodb_client_desc">(Using mongodb-atlas mostly)</string>
+    <string name="text_setting_mongodb_database">mongoDB.database</string>
+    <string name="text_setting_mongodb_database_desc">(Enter your Database name below)</string>
+    <string name="text_setting_mongodb_collection_notes">mongoDB.collection.notes</string>
+    <string name="text_setting_mongodb_collection_notes_desc">(Collection name inside the Database for storing notes)</string>
+    <string name="text_setting_mongodb_collection_key">mongoDB.collection.key</string>
+    <string name="text_setting_mongodb_collection_key_desc">(Collection name inside the Database for storing key)</string>
+    <!-- Firebase Setting -->
+    <string name="text_setting_firebase_common_desc">(found in Firebase project setting)</string>
+    <string name="text_setting_firebase_project_id">Project ID</string>
+    <string name="text_setting_firebase_app_id">Application ID</string>
+    <string name="text_setting_firebase_api_key">API Key</string>
+    <string name="text_setting_firebase_instance_url">Instance URL</string>
+    <string name="text_setting_firebase_instance_url_desc">(your realtime database url)</string>
+    <string name="text_setting_firebase_child_notes">Notes child name</string>
+    <string name="text_setting_firebase_child_notes_desc">(child name of note)</string>
+    <string name="text_setting_firebase_child_key">Key child name</string>
+    <string name="text_setting_firebase_child_key_desc">(child name of key)</string>
+    <string name="text_setting_firebase_info">Make sure Anonymous Authentication is enabled</string>
+    <!-- Google API Setting -->
+    <string name="text_setting_google_api_key">google.safe.browsing.api.key</string>
+    <string name="text_setting_google_api_key_desc">(For QR scanning threat detection)</string>
+    <string name="text_setting_google_api_info">INFO: Leave empty will NOT affect QR Code function</string>
+    <!-- Done Popup -->
+    <string name="text_done_done">DONE</string>
+    <string name="text_done_dismiss">Tap to dismiss</string>
+    <!-- Fragment menu -->
+    <string name="text_search_fragment_menu">Search</string>
 </resources>

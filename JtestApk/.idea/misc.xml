@@ -4,11 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable/common_popup_window.xml" value="0.24358974358974358" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable/common_progress_bar.xml" value="0.2153846153846154" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable/common_table_border.xml" value="0.32393162393162395" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable/currency_full_list_table_border.xml" value="0.41770833333333335" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.2935897435897436" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable/ic_baseline_done_outline_24.xml" value="0.24358974358974358" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable/ic_baseline_save_24.xml" value="0.2606837606837607" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2764957264957265" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable/simple_button_click_effect.xml" value="0.26452991452991453" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable/simple_view_corner_radius.xml" value="0.1876068376068376" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable/textinput_surface_red.xml" value="0.5" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable/textinput_surface_yellow.xml" value="0.39487179487179486" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable/view_underline.xml" value="0.1564102564102564" />
@@ -20,18 +25,33 @@
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_luck_dice.xml" value="0.33" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_lucky_dice.xml" value="0.39829059829059826" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_menu.xml" value="0.25" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_menu.xml" value="0.288265306122449" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_normal_web_view.xml" value="0.2423076923076923" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_notes.xml" value="0.33" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_notes_full.xml" value="0.25" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_notes_paint.xml" value="0.26324786324786326" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_qrcode.xml" value="0.39829059829059826" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/common_fab.xml" value="0.2858974358974359" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/common_pop_window_done.xml" value="0.25" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/common_pop_window_msg.xml" value="0.23034188034188033" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/common_progress_bar.xml" value="0.20213675213675214" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/cur_cal_flag.xml" value="0.2341880341880342" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/cur_cal_row.xml" value="0.33" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/fragment_lucky_dice.xml" value="0.16111111111111112" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/fragment_menu_news.xml" value="0.1" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/fragment_menu_weather_page.xml" value="0.2" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/fragment_screen_slide_page.xml" value="0.34786324786324785" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/fragment_test.xml" value="0.19948186528497408" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/images_holder.xml" value="0.21581196581196582" />
-        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/menu_app_setting_popup.xml" value="0.1" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/menu_app_setting_popup.xml" value="0.33" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/menu_app_setting_popup_firebase.xml" value="0.25" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/menu_app_setting_popup_google_api.xml" value="0.5" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/menu_app_setting_popup_mongodb.xml" value="0.5" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/menu_app_setting_select.xml" value="0.33" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/menu_app_setting_viewpager.xml" value="0.1794871794871795" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/menu_news_rss_card.xml" value="0.5681818181818182" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/menu_weather_grid.xml" value="0.33" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/menu_weather_page.xml" value="0.1" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/note_grid_text_task.xml" value="0.21837606837606838" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/note_pin_input.xml" value="0.5" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/note_task_row.xml" value="0.25" />
@@ -39,6 +59,8 @@
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/notes_grid_paint.xml" value="0.33" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/notes_grid_text.xml" value="0.33" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/notes_tools_layout.xml" value="0.5" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/pager_view_holder.xml" value="0.10299145299145299" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/qr_code_api_confirm_popup.xml" value="0.5" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/quick_check_cur.xml" value="0.24273504273504273" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/textinput_surface_red.xml" value="0.16538461538461538" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.41875" />

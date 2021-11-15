@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +19,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -96,6 +99,8 @@ public class NotesActivity extends AppCompatActivity {
     private TextInputEditText notesContentInput;
     private Button submitNotesButton;
     private TableLayout noteTable;
+    private View donePopupView;
+    private PopupWindow popupWindow;
 
     private App mongoApp;
     private User mongoUser;
@@ -171,6 +176,27 @@ public class NotesActivity extends AppCompatActivity {
         noteTitle = notesTitleTextInput.getText().toString();
         notesContentInput = (TextInputEditText) findViewById(R.id.notesContentInput);
         noteContent = notesContentInput.getText().toString();
+        donePopupView = inflater.inflate(R.layout.common_pop_window_done, null);
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        popupWindow = new PopupWindow(donePopupView, width, height, true);
+        popupWindow.setAnimationStyle(R.style.customDialogInOutAnimation);
+        donePopupView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+            }
+        });
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                if (isEdit) {
+                    Intent intent = new Intent(NotesActivity.this, NotesListViewActivity.class);
+                    startActivity(intent);
+                }
+                finish();
+            }
+        });
 
         //get context from before activity
         isEdit = getIntent().getBooleanExtra("isEdit", false);
@@ -208,7 +234,6 @@ public class NotesActivity extends AppCompatActivity {
             public void onClick(View view) {
                 PopupMenu popupMenu = new PopupMenu(NotesActivity.this, moreActionNotesButton);
                 popupMenu.getMenu().add(Menu.NONE, CONTEXT_MENU_ADD_TASK, Menu.NONE, "Add Task");
-                popupMenu.getMenu().add(Menu.NONE, CONTEXT_MENU_ADD_TASK_TEST, Menu.NONE, "Add Task TEST");
 //                SubMenu subMenuEmbed = popupMenu.getMenu().addSubMenu(Menu.NONE, CONTEXT_MENU_EMBED, Menu.NONE, "Embed");
 //                subMenuEmbed.add(Menu.NONE, CONTEXT_MENU_EMBED_PAINTS, Menu.NONE, "Embed a Paint");
                 SubMenu subMenuLock = popupMenu.getMenu().addSubMenu(Menu.NONE, CONTEXT_MENU_LOCK, Menu.NONE, "Lock");
@@ -226,19 +251,6 @@ public class NotesActivity extends AppCompatActivity {
                             case CONTEXT_MENU_ADD_TASK: {
                                 setupTaskTable(null);   // add new
                                 Toast.makeText(getApplicationContext(),"CONTEXT_MENU_ADD_TASK", Toast.LENGTH_SHORT).show();
-                            }
-                            break;
-                            case CONTEXT_MENU_ADD_TASK_TEST: {
-                                Log.v("TASK TEST", noteTaskModelObjectList.toString());
-                                for (NoteTaskModelObject noteTaskModelObject : noteTaskModelObjectList) {
-                                    Log.v("TASK TEST", "ROW: " + findViewById(noteTaskModelObject.getRowId()));
-                                    Log.v("TASK TEST", "TOGGLE BUTTON: " + findViewById(noteTaskModelObject.getToggleButtonId()));
-                                    Log.v("TASK TEST", "TASK INPUT: " + findViewById(noteTaskModelObject.getTaskInputId()));
-                                    TextInputEditText textInput = findViewById(noteTaskModelObject.getTaskInputId());
-                                    Log.v("TASK TEST", "TASK INPUT text: " + textInput.getText().toString());
-                                    Log.v("TASK TEST", "CANCEL BUTTON: " + findViewById(noteTaskModelObject.getCancelButtonId()));
-                                }
-                                Toast.makeText(getApplicationContext(),"CONTEXT_MENU_ADD_TASK_TEST", Toast.LENGTH_SHORT).show();
                             }
                             break;
                             case CONTEXT_MENU_EMBED_PAINTS: {
@@ -315,9 +327,8 @@ public class NotesActivity extends AppCompatActivity {
                             if (task.isSuccess()) {
                                 Log.v("EXAMPLE", "successfully updated a document.");
                                 Toast.makeText(getApplicationContext(),"Note in MongoDB is updated.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(NotesActivity.this, NotesListViewActivity.class);
-                                startActivity(intent);
-                                finish();
+                                //show done popup
+                                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
                             } else {
                                 Log.e("EXAMPLE", "failed to update document with: ", task.getError());
                                 Toast.makeText(getApplicationContext(),"Upload Failed: " + task.getError(), Toast.LENGTH_SHORT).show();
@@ -329,7 +340,8 @@ public class NotesActivity extends AppCompatActivity {
                             if (task.isSuccess()) {
                                 Log.v("EXAMPLE", "successfully inserted documents into the collection.");
                                 Toast.makeText(getApplicationContext(),"Inserted into MongoDB.", Toast.LENGTH_SHORT).show();
-                                finish();
+                                //show done popup
+                                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
                             } else {
                                 Log.e("EXAMPLE", "failed to insert documents with: ", task.getError());
                                 Toast.makeText(getApplicationContext(),"Upload Failed: " + task.getError(), Toast.LENGTH_SHORT).show();

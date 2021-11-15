@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.jtestapk.R;
 import com.example.model.WeatherForecast;
 import com.example.utils.CustomAnimationUtils;
+import com.example.utils.ImageConvertUtils;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -86,31 +87,38 @@ public class MenuWeatherGridAdapter extends BaseAdapter {
         forecastTemp.setText(weatherForecast.getForecastMintemp().getValue() + "°C - " + weatherForecast.getForecastMaxtemp().getValue() + "°C");
         ImageView weatherImageView = view.findViewById(R.id.weatherImageView);
         String imageUrl = "https://www.hko.gov.hk/images/HKOWxIconOutline/pic" + weatherForecast.getForecastIcon() + ".png";
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL(imageUrl);
+        String imageStrCache = sharedPrefWeather.getString(imageUrl, "");
+        if (imageStrCache.isEmpty()) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        URL url = new URL(imageUrl);
 //                    Log.v("IMAGE", "url = " + url);
-                    Bitmap mIcon_val = BitmapFactory.decodeStream(url.openConnection() .getInputStream());
-                    new Handler(Looper.getMainLooper()).post(new Runnable(){
-                        @Override
-                        public void run() {
-                            weatherImageView.setImageBitmap(mIcon_val);
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    new Handler(Looper.getMainLooper()).post(new Runnable(){
-                        @Override
-                        public void run() {
-                            weatherImageView.setImageResource(R.drawable.ic_baseline_cancel_24);
-                        }
-                    });
+                        Bitmap weatherImage = BitmapFactory.decodeStream(url.openConnection() .getInputStream());
+                        new Handler(Looper.getMainLooper()).post(new Runnable(){
+                            @Override
+                            public void run() {
+                                weatherImageView.setImageBitmap(weatherImage);
+                                sharedPrefWeather.edit().putString(imageUrl, ImageConvertUtils.convertBitmapToString(weatherImage)).commit();
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        new Handler(Looper.getMainLooper()).post(new Runnable(){
+                            @Override
+                            public void run() {
+                                weatherImageView.setImageResource(R.drawable.ic_baseline_cancel_24);
+                            }
+                        });
+                    }
                 }
-            }
-        }).start();
-        view.setAnimation(customAnimationUtils.fadeInAnimationDefault(context));
+            }).start();
+        } else {
+            Bitmap weatherImage = ImageConvertUtils.convertStringToBitmap(imageStrCache);
+            weatherImageView.setImageBitmap(weatherImage);
+        }
+//        view.setAnimation(customAnimationUtils.fadeInAnimationDefault(context));
         return view;
     }
 }

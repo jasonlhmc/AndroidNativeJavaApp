@@ -21,6 +21,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,6 +33,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -81,6 +83,8 @@ public class NotePaintActivity extends AppCompatActivity implements ColorPickerD
     private boolean seekBarViewVisibility;
 
     private LayoutInflater inflater;
+    private View donePopupView;
+    private PopupWindow popupWindow;
 
     private AlertDialog.Builder dialogBuilder;
     private int alphaInputInt = 255;
@@ -197,6 +201,27 @@ public class NotePaintActivity extends AppCompatActivity implements ColorPickerD
 
         View toolsLayout = inflater.inflate(R.layout.notes_tools_layout, constraintLayout, false);
         constraintLayout.addView(toolsLayout);
+        donePopupView = inflater.inflate(R.layout.common_pop_window_done, null);
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        popupWindow = new PopupWindow(donePopupView, width, height, true);
+        popupWindow.setAnimationStyle(R.style.customDialogInOutAnimation);
+        donePopupView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+            }
+        });
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                if (isEdit) {
+                    Intent intent = new Intent(NotePaintActivity.this, NotesListViewActivity.class);
+                    startActivity(intent);
+                }
+                finish();
+            }
+        });
 
         seekBarView = inflater.inflate(R.layout.common_seekbar, constraintLayout, false);
         seekBarViewVisibility = false;
@@ -316,9 +341,8 @@ public class NotePaintActivity extends AppCompatActivity implements ColorPickerD
                         if (task.isSuccess()) {
                             Log.v("EXAMPLE", "successfully updated a document.");
                             Toast.makeText(getApplicationContext(),"Note in MongoDB is updated.", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(NotePaintActivity.this, NotesListViewActivity.class);
-                            startActivity(intent);
-                            finish();
+                            //show done popup
+                            popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
                         } else {
                             Log.e("EXAMPLE", "failed to update document with: ", task.getError());
                             Toast.makeText(getApplicationContext(),"Upload Failed: " + task.getError(), Toast.LENGTH_SHORT).show();
@@ -335,7 +359,8 @@ public class NotePaintActivity extends AppCompatActivity implements ColorPickerD
                         if (task.isSuccess()) {
                             Log.v("EXAMPLE", "successfully inserted documents into the collection.");
                             Toast.makeText(getApplicationContext(),"Inserted into MongoDB.", Toast.LENGTH_SHORT).show();
-                            finish();
+                            //show done popup
+                            popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
                         } else {
                             Log.e("EXAMPLE", "failed to insert documents with: ", task.getError());
                             Toast.makeText(getApplicationContext(),"Upload Failed: " + task.getError(), Toast.LENGTH_SHORT).show();
