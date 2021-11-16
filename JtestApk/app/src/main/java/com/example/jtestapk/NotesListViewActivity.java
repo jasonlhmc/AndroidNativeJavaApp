@@ -458,7 +458,7 @@ public class NotesListViewActivity extends AppCompatActivity {
                 isPinLock = selectedNote.isPinLock();
                 isFPLock = selectedNote.isFPLock();
                 deleteQueryKey = noteModelObjectList.get(i).getDateStr();
-                view.setBackgroundColor(Color.GRAY);
+//                view.setBackgroundColor(Color.GRAY);
                 PopupMenu popupMenu = new PopupMenu(NotesListViewActivity.this, view);
                 popupMenu.getMenu().add(0, DELETE_ACTION_CONTEXT_MENU, 0, getResources().getString(R.string.grid_menu_delete));
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -470,7 +470,7 @@ public class NotesListViewActivity extends AppCompatActivity {
                 popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
                     @Override
                     public void onDismiss(PopupMenu popupMenu) {
-                        view.setBackgroundColor(Color.DKGRAY);
+//                        view.setBackgroundColor(Color.DKGRAY);
                     }
                 });
                 popupMenu.show();

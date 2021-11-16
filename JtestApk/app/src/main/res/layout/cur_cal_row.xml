@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:weightSum="1"
-    android:background="@drawable/common_table_border"
+    android:background="@drawable/simple_view_corner_radius"
     app:layout_constraintTop_toTopOf="parent">
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.25"
-        android:background="@drawable/common_table_border"
+        android:background="@drawable/simple_view_corner_radius"
         android:ellipsize="marquee"
         android:gravity="center_vertical|center_horizontal"
         android:marqueeRepeatLimit="marquee_forever"

@@ -18,7 +18,7 @@
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable/textinput_surface_yellow.xml" value="0.39487179487179486" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/drawable/view_underline.xml" value="0.1564102564102564" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/acricity_currency.xml" value="0.5536458333333333" />
-        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_cur_cal.xml" value="0.18" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_cur_cal.xml" value="0.33" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_currenct_full.xml" value="0.5" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_currency.xml" value="0.33" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/activity_currency_full.xml" value="0.33" />
@@ -36,10 +36,10 @@
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/common_pop_window_msg.xml" value="0.23034188034188033" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/common_progress_bar.xml" value="0.20213675213675214" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/cur_cal_flag.xml" value="0.2341880341880342" />
-        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/cur_cal_row.xml" value="0.33" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/cur_cal_row.xml" value="0.67" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/fragment_lucky_dice.xml" value="0.16111111111111112" />
-        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/fragment_menu_news.xml" value="0.1" />
-        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/fragment_menu_weather_page.xml" value="0.2" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/fragment_menu_news.xml" value="0.5" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/fragment_menu_weather_page.xml" value="0.33" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/fragment_screen_slide_page.xml" value="0.34786324786324785" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/fragment_test.xml" value="0.19948186528497408" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/images_holder.xml" value="0.21581196581196582" />
@@ -49,16 +49,16 @@
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/menu_app_setting_popup_mongodb.xml" value="0.5" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/menu_app_setting_select.xml" value="0.33" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/menu_app_setting_viewpager.xml" value="0.1794871794871795" />
-        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/menu_news_rss_card.xml" value="0.5681818181818182" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/menu_news_rss_card.xml" value="0.33" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/menu_weather_grid.xml" value="0.33" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/menu_weather_page.xml" value="0.1" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/note_grid_text_task.xml" value="0.21837606837606838" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/note_pin_input.xml" value="0.5" />
-        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/note_task_row.xml" value="0.25" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/note_task_row.xml" value="0.5" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/notes_argb_colorpicker_rectangle.xml" value="0.2833333333333333" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/notes_grid_paint.xml" value="0.33" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/notes_grid_text.xml" value="0.33" />
-        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/notes_tools_layout.xml" value="0.5" />
+        <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/notes_tools_layout.xml" value="0.75" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/pager_view_holder.xml" value="0.10299145299145299" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/qr_code_api_confirm_popup.xml" value="0.5" />
         <entry key="..\:/Users/lauhi/AndroidStudioProjects/JtestApk/app/src/main/res/layout/quick_check_cur.xml" value="0.24273504273504273" />

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:weightSum="1"
-    android:background="@drawable/common_table_border"
+    android:background="@drawable/simple_view_corner_radius"
     app:layout_constraintTop_toTopOf="parent">
 
     <ToggleButton

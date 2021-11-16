@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AbsListView;
@@ -93,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView fabTextWeatherTranslate;
     private SwipeRefreshLayout weatherPagerRefresh, newsPagerRefresh;
     private ProgressBar commonProgressBar;
+    private LinearLayout newsCardList;
 
     private App mongoApp;
 
@@ -694,6 +696,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 if (keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
+                    newsCardList.setVisibility(View.INVISIBLE);
                     getGoogleNewsRss(newsSearchInput.getText().toString());
                     Toast.makeText(getApplicationContext(),"Searching..", Toast.LENGTH_SHORT).show();
                     return true;
@@ -706,18 +709,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 if (newsSearchInput.getText().toString() == null || newsSearchInput.getText().toString().isEmpty()) {
+                    newsCardList.setVisibility(View.INVISIBLE);
                     getGoogleNewsRss(null);
                 } else {
+                    newsCardList.setVisibility(View.INVISIBLE);
                     getGoogleNewsRss(newsSearchInput.getText().toString());
                 }
                 newsPagerRefresh.setRefreshing(false);
                 Toast.makeText(getApplicationContext(),"F5", Toast.LENGTH_SHORT).show();
             }
         });
-        LinearLayout cardList = (LinearLayout) findViewById(R.id.cardList);
-        cardList.removeAllViews();
+        newsCardList = (LinearLayout) findViewById(R.id.cardList);
+        newsCardList.removeAllViews();
         for (GoogleNewsRssModelObject googleNewsRssModelObject : googleNewsRssModelObjectList) {
-            CardView newsCard = (CardView) inflater.inflate(R.layout.menu_news_rss_card, cardList, false);
+            CardView newsCard = (CardView) inflater.inflate(R.layout.menu_news_rss_card, newsCardList, false);
             TextView newsTitle = (TextView) newsCard.findViewById(R.id.newsTitle);
             newsTitle.setText(googleNewsRssModelObject.getTitle());
             TextView newsDate = (TextView) newsCard.findViewById(R.id.newsDate);
@@ -730,13 +735,14 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-            cardList.addView(newsCard);
+            newsCardList.addView(newsCard);
         }
         commonProgressBar.setVisibility(View.GONE);
+        newsCardList.setVisibility(View.VISIBLE);
     }
 
     private void weatherObjectLayoutSetup() {
-        //get weather forecast json resoponse
+        //get weather forecast json response
         if (sharedPrefWeather.getBoolean("isWeatherEn", true)) {
             url = appProperties.getProperty("weather.forecast.en.api");
         } else {
@@ -781,7 +787,8 @@ public class MainActivity extends AppCompatActivity {
                             if (i == 0) {
                                 try {
                                     View fullyShown = weatherForecastGrid.getChildAt(0);
-                                    if (fullyShown != null && fullyShown.getTop() == 0) {
+//                                    float density = getResources().getDisplayMetrics().density;
+                                    if (fullyShown != null && fullyShown.getTop() == fullyShown.getPaddingTop()) {
                                         weatherPagerRefresh.setEnabled(true);
                                     } else {
                                         weatherPagerRefresh.setEnabled(false);

@@ -290,7 +290,7 @@ public class CheckCurrencyActivity extends AppCompatActivity {
         currencyFullListTable.removeAllViews();
         for (CurrencyObject currencyObject : currencyObjectList) {
             TableRow tableRow = new TableRow(this);
-            tableRow.setBackgroundResource(R.drawable.common_table_border);
+            tableRow.setBackgroundResource(R.drawable.simple_view_corner_radius);
             tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
             tableRow.setWeightSum(1f);
             tableRow.setMinimumHeight(100);

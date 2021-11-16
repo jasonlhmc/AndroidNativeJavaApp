@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/view_underline"
-                android:textColor="@color/white"
+                android:textColor="@android:color/white"
                 android:padding="2dp"/>
             <TextView
                 android:layout_weight="0.4"
@@ -40,7 +40,7 @@
                 android:textSize="12sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="@android:color/white"
                 android:padding="2dp"/>
         </LinearLayout>
     </LinearLayout>
@@ -59,7 +59,7 @@
             android:layout_height="0dp"
             android:layout_weight="0.5"
             android:background="@drawable/view_underline"
-            android:textColor="@color/white"
+            android:textColor="@android:color/white"
             android:padding="2dp"/>
         <TextView
             android:id="@+id/forecastWind"
@@ -70,7 +70,7 @@
             android:layout_height="0dp"
             android:layout_weight="0.5"
             android:background="@drawable/view_underline"
-            android:textColor="@color/white"
+            android:textColor="@android:color/white"
             android:padding="2dp" />
     </LinearLayout>
 

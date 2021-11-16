@@ -52,7 +52,6 @@ public class NotesFullListGridAdapter extends BaseAdapter {
         NoteModelObject noteModelObject = noteModelObjectList.get(i);
         if (noteModelObject.isPaint()) {
             view = inflater.inflate(R.layout.notes_grid_paint, viewGroup, false);
-            view.setBackgroundColor(Color.DKGRAY);
             TextView noteTextLock = (TextView) view.findViewById(R.id.noteTextLock);
             if (noteModelObject.isPinLock()) {
                 noteTextLock.setText(context.getResources().getString(R.string.text_lock_pin));
@@ -85,7 +84,6 @@ public class NotesFullListGridAdapter extends BaseAdapter {
         } else {
             String content = "";
             view = inflater.inflate(R.layout.notes_grid_text, viewGroup, false);
-            view.setBackgroundColor(Color.DKGRAY);
             TextView noteTextLock = (TextView) view.findViewById(R.id.noteTextLock);
             if (noteModelObject.isPinLock()) {
                 noteTextLock.setText(context.getResources().getString(R.string.text_lock_pin));
